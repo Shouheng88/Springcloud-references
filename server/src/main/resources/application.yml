@@ -1,0 +1,32 @@
+spring:
+  profiles:
+    active: peer1
+
+---
+spring:
+  profiles: peer1
+server:
+  port: 8761
+eureka:
+  instance:
+    hostname: peer1
+  client:
+#    register-with-eureka: false
+#    fetch-registry: false
+    service-url:
+      defaultZoon: http://peer2:8762/eureka
+test-env: "peer1"
+
+---
+spring:
+  profiles: peer2
+server:
+  port: 8762
+eureka:
+  instance:
+    hostname: peer2
+  client:
+    service-url:
+      defaultZoon: http://peer1:8761/eureka
+test-env: "peer2"
+

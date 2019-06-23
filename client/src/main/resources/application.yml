@@ -1,0 +1,6 @@
+server:
+  port: 8099
+eureka:
+  client:
+    service-url:
+      defaultZoon: http://peer1:8761/eureka, http://peer2:8762/eureka
