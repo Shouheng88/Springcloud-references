@@ -2,6 +2,8 @@ package me.shouheng.server.controller;
 
 import me.shouheng.comm.model.Task;
 import me.shouheng.comm.model.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +19,8 @@ import java.util.List;
 @RequestMapping(value = "/user")
 public class UserController {
 
+    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
     @Autowired
     private RestTemplate restTemplate;
 
@@ -27,6 +31,8 @@ public class UserController {
 
     @RequestMapping(value = "/tasks")
     public List<Task> getTasks() {
-        return restTemplate.getForObject("", List.class);
+        List<Task> tasks = restTemplate.getForObject("http://localhost:8099/task/get", List.class);
+        logger.info("getTasks {}", tasks);
+        return tasks;
     }
 }
